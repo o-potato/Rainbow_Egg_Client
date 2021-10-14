@@ -115,55 +115,55 @@ public class RegisterActivity extends Activity {
 //                        System.out.println(jsonstr);
 
                         //本地测试
-//                        uploadPicForTest(path);
-//                        Handler handler=new Handler(Looper.getMainLooper());
-//                        handler.post(new Runnable(){
-//                            public void run(){
-//                                Toast.makeText(RegisterActivity.this,"注册成功，请重新登录！",Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                        Intent nextIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-//                        startActivity(nextIntent);
-//                        finish();
-
-                        //正式代码
-                        uploadPic(path);
-
-                        RequestBody body = RequestBody.create(MediaType.parse("application/json"),jsonstr);
-                        OkHttpClient client = new OkHttpClient();
-                        Request request = new Request.Builder().url("http://10.176.50.27:8888/insert").post(body).build();
-                        Log.d("RegisterActivity", "insert request");
-
-                        client.newCall(request).enqueue(new Callback() {
-                            @Override
-                            public void onFailure(Call call, IOException e) {
-//                                Log.v("call","fail");
-                                Log.d("RegisterActivity", "call fail");
-                            }
-
-                            @Override
-                            public void onResponse(Call call, Response response) throws IOException {
-                                String back = response.body().string();
-                                if(back.equals("success")){
-                                    Handler handler=new Handler(Looper.getMainLooper());
-                                    handler.post(new Runnable(){
-                                        public void run(){
-                                            Toast.makeText(RegisterActivity.this,"注册成功，请重新登录！",Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                    Intent nextIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                    startActivity(nextIntent);
-                                    finish();
-                                }else if(back.equals("fail")){
-                                    Handler handler=new Handler(Looper.getMainLooper());
-                                    handler.post(new Runnable(){
-                                        public void run(){
-                                            Toast.makeText(RegisterActivity.this,"注册失败，请重试！",Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
+                        uploadPicForTest(path);
+                        Handler handler=new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable(){
+                            public void run(){
+                                Toast.makeText(RegisterActivity.this,"注册成功，请重新登录！",Toast.LENGTH_SHORT).show();
                             }
                         });
+                        Intent nextIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(nextIntent);
+                        finish();
+
+                        //正式代码
+//                        uploadPic(path);
+//
+//                        RequestBody body = RequestBody.create(MediaType.parse("application/json"),jsonstr);
+//                        OkHttpClient client = new OkHttpClient();
+//                        Request request = new Request.Builder().url("http://10.176.50.27:8888/insert").post(body).build();
+//                        Log.d("RegisterActivity", "insert request");
+//
+//                        client.newCall(request).enqueue(new Callback() {
+//                            @Override
+//                            public void onFailure(Call call, IOException e) {
+////                                Log.v("call","fail");
+//                                Log.d("RegisterActivity", "call fail");
+//                            }
+//
+//                            @Override
+//                            public void onResponse(Call call, Response response) throws IOException {
+//                                String back = response.body().string();
+//                                if(back.equals("success")){
+//                                    Handler handler=new Handler(Looper.getMainLooper());
+//                                    handler.post(new Runnable(){
+//                                        public void run(){
+//                                            Toast.makeText(RegisterActivity.this,"注册成功，请重新登录！",Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+//                                    Intent nextIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+//                                    startActivity(nextIntent);
+//                                    finish();
+//                                }else if(back.equals("fail")){
+//                                    Handler handler=new Handler(Looper.getMainLooper());
+//                                    handler.post(new Runnable(){
+//                                        public void run(){
+//                                            Toast.makeText(RegisterActivity.this,"注册失败，请重试！",Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+//                                }
+//                            }
+//                        });
                     } else {
                         Handler handler=new Handler(Looper.getMainLooper());
                         handler.post(new Runnable(){
