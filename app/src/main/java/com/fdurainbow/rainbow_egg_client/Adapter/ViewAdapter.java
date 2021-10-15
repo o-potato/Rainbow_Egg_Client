@@ -73,7 +73,7 @@ public class ViewAdapter extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder)view.getTag();
         }
-        viewHolder.img_avatar.setImageURL("http://10.176.50.27:8888/uploadavatar/"+datas.get(i).getHostAvatar());
+        viewHolder.img_avatar.setImageURL("http://10.176.50.27:8080/uploadavatar/"+datas.get(i).getHostAvatar());
         viewHolder.tv_name.setText(datas.get(i).getHostNick());
         viewHolder.tv_time.setText(datas.get(i).getCreateTime());
         viewHolder.tv_content.setText(datas.get(i).getMom_textField());
@@ -98,7 +98,7 @@ public class ViewAdapter extends BaseAdapter {
         int p=0;
         for(int k=0; k<sImage.length();k++){
             if(sImage.charAt(k) == '|'){
-                image_item = "http://10.176.50.27:8888/uploadimage/"+sImage.substring(p,k);
+                image_item = "http://10.176.50.27:8080/uploadimage/"+sImage.substring(p,k);
                 //image_item = sImage.substring(p,k);
                 Log.v("Myimage2",image_item);
                 p=k+1;
@@ -107,12 +107,12 @@ public class ViewAdapter extends BaseAdapter {
         }
         if(image_list.size() == 0){
             Log.v("Myimage1",sImage);
-            image_list.add("http://10.176.50.27:8888/uploadimage/"+sImage);
+            image_list.add("http://10.176.50.27:8080/uploadimage/"+sImage);
         }
 
         else{
             image_item = sImage.substring(p,sImage.length());
-            image_list.add("http://10.176.50.27:8888/uploadimage/"+image_item);
+            image_list.add("http://10.176.50.27:8080/uploadimage/"+image_item);
             Log.v("Myimage2",image_item);
         }
         viewHolder.mImageLayout.setUrlList(image_list);

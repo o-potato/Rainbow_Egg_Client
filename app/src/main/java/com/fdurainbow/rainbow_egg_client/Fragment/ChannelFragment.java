@@ -60,7 +60,7 @@ public class ChannelFragment extends Fragment {
                     RequestBody body = RequestBody.create(MediaType.parse("application/json"),jsonstr);
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://10.176.50.27:8888/findcollect")
+                            .url("http://10.176.50.27:8080/findcollect")
                             .post(body)
                             .build();
                     client.newCall(request).enqueue(new okhttp3.Callback() {
@@ -102,7 +102,7 @@ public class ChannelFragment extends Fragment {
                     RequestBody body = RequestBody.create(MediaType.parse("application/json"),jsonstr);
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://10.176.50.27:8888/findpraise")
+                            .url("http://10.176.50.27:8080/findpraise")
                             .post(body)
                             .build();
                     client.newCall(request).enqueue(new okhttp3.Callback() {

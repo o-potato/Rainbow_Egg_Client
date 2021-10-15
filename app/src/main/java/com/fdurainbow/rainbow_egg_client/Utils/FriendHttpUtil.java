@@ -20,7 +20,7 @@ public class FriendHttpUtil {
         ID = Integer.toString(hostID);
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://10.176.50.27:8888/friend?id="+ID)
+                .url("http://10.176.50.27:8080/friend?id="+ID)
                 .build();
         Call call = client.newCall(request);
 

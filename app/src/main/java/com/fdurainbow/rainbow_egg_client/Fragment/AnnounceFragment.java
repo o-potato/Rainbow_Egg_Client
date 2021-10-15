@@ -97,7 +97,7 @@ public class AnnounceFragment extends Fragment {
                 RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonstr);
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("http://10.176.50.27:8888/momentadd")
+                        .url("http://10.176.50.27:8080/momentadd")
                         .post(body)//
                         .build();
                 client.newCall(request).enqueue(new Callback() {
@@ -117,7 +117,7 @@ public class AnnounceFragment extends Fragment {
                                     .addFormDataPart("ss","",RequestBody.create(MediaType.parse("image/png"),file))
                                     .build();
                             Request request = new Request.Builder()
-                                    .url("http://10.176.50.27:8888/uploadimage")
+                                    .url("http://10.176.50.27:8080/uploadimage")
                                     .post(body)
                                     .build();
                             client.newCall(request).enqueue(new Callback() {

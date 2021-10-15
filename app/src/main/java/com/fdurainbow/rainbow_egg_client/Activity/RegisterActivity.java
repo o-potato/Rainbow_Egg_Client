@@ -69,6 +69,7 @@ public class RegisterActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         logo = (ImageView) findViewById(R.id.r_logo);
         username =(EditText) findViewById(R.id.register_username);
         userid =(EditText) findViewById(R.id.register_id);
@@ -280,7 +281,7 @@ public class RegisterActivity extends Activity {
             File file = new File(imagePath);
             MultipartBody body = new MultipartBody.Builder().addFormDataPart("hostID",id_str).addFormDataPart("file",id_str+".jpg",RequestBody.create(MediaType.parse("image/jpg"),file)).build();
             OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder().url("http://10.176.50.27:8888/uploadavatar").post(body).build();
+            Request request = new Request.Builder().url("http://10.176.50.27:8080/uploadavatar").post(body).build();
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {

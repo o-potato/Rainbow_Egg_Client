@@ -27,7 +27,7 @@ public class ReceiveInfo {
 
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()//get
-                    .url("http://10.176.50.27:8888/all?id="+ID)
+                    .url("http://10.176.50.27:8080/all?id="+ID)
                     .build();
             Call call = client.newCall(request);
             try {
@@ -50,7 +50,7 @@ public class ReceiveInfo {
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()//get
-                .url("http://10.176.50.27:8888/mycollect?id="+ID)
+                .url("http://10.176.50.27:8080/mycollect?id="+ID)
                 .build();
         Call call = client.newCall(request);
         try {
@@ -73,7 +73,7 @@ public class ReceiveInfo {
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()//get
-                .url("http://10.176.50.27:8888/comment?id="+ID)
+                .url("http://10.176.50.27:8080/comment?id="+ID)
                 .build();
         Call call = client.newCall(request);
         try {
@@ -96,7 +96,7 @@ public class ReceiveInfo {
 
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()//get
-                .url("http://10.176.50.27:8888/mymoment?id="+ID)
+                .url("http://10.176.50.27:8080/mymoment?id="+ID)
                 .build();
         Call call = client.newCall(request);
         try {

@@ -18,7 +18,7 @@ public class MyselfUtil {
         ID = Integer.toString(hostID);
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("http://10.176.50.27:8888/mainhost?id="+ID)
+                .url("http://10.176.50.27:8080/mainhost?id="+ID)
                 .build();
         Call call = client.newCall(request);
 

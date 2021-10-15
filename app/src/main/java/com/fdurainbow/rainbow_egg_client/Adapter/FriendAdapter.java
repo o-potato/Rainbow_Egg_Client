@@ -52,7 +52,7 @@ public class FriendAdapter extends BaseAdapter {
         }else{
             viewHolder2 = (ViewHolder2)convertView.getTag();
         }
-        viewHolder2.fdimage.setImageURL("http://10.176.50.27:8888/uploadavatar/"+mData.get(position).getAvatar());
+        viewHolder2.fdimage.setImageURL("http://10.176.50.27:8080/uploadavatar/"+mData.get(position).getAvatar());
         viewHolder2.name.setText(mData.get(position).getNick());
         viewHolder2.qianming.setText(mData.get(position).getSign());
         return convertView;

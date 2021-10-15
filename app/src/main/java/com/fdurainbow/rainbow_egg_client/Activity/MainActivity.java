@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void handleMessage(Message msg){
             MyInfo = (ContentInfo) msg.obj;
 
-            user_image.setImageURL("http://10.176.50.27:8888/uploadavatar/"+MyInfo.getAvatar());
+            user_image.setImageURL("http://10.176.50.27:8080/uploadavatar/"+MyInfo.getAvatar());
             user_name.setText(MyInfo.getNick());
             user_sign.setText(MyInfo.getSign());
         }
