@@ -98,18 +98,22 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_item1:
                         Intent intent  = new Intent(MainActivity.this,MyCollectActivity.class);
                         startActivity(intent);
+                        finish();
                         break;
                     case R.id.menu_item2:
                         Intent intent2  = new Intent(MainActivity.this,MyLikeActivity.class);
                         startActivity(intent2);
+                        finish();
                         break;
                     case R.id.menu_item3:
                         Intent intent3  = new Intent(MainActivity.this,CommentActivity.class);
                         startActivity(intent3);
+                        finish();
                         break;
                     case R.id.menu_item4:
                         Intent intent4  = new Intent(MainActivity.this,MyMomentActivity.class);
                         startActivity(intent4);
+                        finish();
                         break;
                 }
                 return true;
@@ -127,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,FollowActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
