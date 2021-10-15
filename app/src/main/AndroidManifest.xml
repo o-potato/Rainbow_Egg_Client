@@ -15,7 +15,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Rainbow_Egg_Client">
+        android:theme="@style/Theme.Rainbow_Egg_Client"
+        android:usesCleartextTraffic="true">
         <activity android:name=".Activity.MyMomentActivity"></activity>
         <activity android:name=".Activity.CommentActivity" />
         <activity android:name=".Activity.MyLikeActivity" />

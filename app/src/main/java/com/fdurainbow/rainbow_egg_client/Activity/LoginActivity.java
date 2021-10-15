@@ -65,51 +65,51 @@ public class LoginActivity extends AppCompatActivity {
         check_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                hostID = Integer.parseInt(id.getText().toString());
+                hostID = Integer.parseInt(id.getText().toString());
                 //本地测试
-                hostID = Integer.parseInt(id.getText().toString().substring(0,3) + id.getText().toString().substring(7));
+//                hostID = Integer.parseInt(id.getText().toString().substring(0,3) + id.getText().toString().substring(7));
                 String password_str = password.getText().toString();
                 HostInfo hostInfo = new HostInfo(hostID,null,null,password_str);
                 String jsonstr = new Gson().toJson(hostInfo);
 
                 //本地测试
-                if(password_str.equals("123456") && hostID == 1887576) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(LoginActivity.this,"手机号码或密码错误，请重新输入！",Toast.LENGTH_SHORT).show();
-                }
+//                if(password_str.equals("123456") && hostID == 1887576) {
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                } else {
+//                    Toast.makeText(LoginActivity.this,"手机号码或密码错误，请重新输入！",Toast.LENGTH_SHORT).show();
+//                }
 
                 //正式代码
-//                RequestBody body = RequestBody.create(MediaType.parse("application/json"),jsonstr);
-//                OkHttpClient client = new OkHttpClient();
-//                Request request = new Request.Builder().url("http://10.176.50.27:8080/login").post(body).build();
-//
-//                client.newCall(request).enqueue(new Callback() {
-//                    @Override
-//                    public void onFailure(Call call, IOException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                    @Override
-//                    public void onResponse(Call call, Response response) throws IOException {
-//                        String back = response.body().string();
-//
-//                        if(back.equals("success")){
-//                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-//                            startActivity(intent);
-//                            //finish();
-//                        }else if(back.equals("fail")){
-//                            Handler handler=new Handler(Looper.getMainLooper());
-//                            handler.post(new Runnable(){
-//                                public void run(){
-//                                    Toast.makeText(LoginActivity.this,"手机号码或密码错误，请重新输入！",Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
-//                        }
-//                    }
-//                });
+                RequestBody body = RequestBody.create(MediaType.parse("application/json"),jsonstr);
+                OkHttpClient client = new OkHttpClient();
+                Request request = new Request.Builder().url("http://10.176.50.27:8080/login").post(body).build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String back = response.body().string();
+
+                        if(back.equals("success")){
+                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else if(back.equals("fail")){
+                            Handler handler=new Handler(Looper.getMainLooper());
+                            handler.post(new Runnable(){
+                                public void run(){
+                                    Toast.makeText(LoginActivity.this,"手机号码或密码错误，请重新输入！",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+                });
             }
         });
     }
