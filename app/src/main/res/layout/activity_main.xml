@@ -34,7 +34,7 @@
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
                     android:gravity="center"
-                    android:textSize="18sp"
+                    android:textSize="24sp"
                     android:textColor="@color/text_topbar"
                     android:text="@string/tab_menu_alert"
                     android:layout_weight="8"/>

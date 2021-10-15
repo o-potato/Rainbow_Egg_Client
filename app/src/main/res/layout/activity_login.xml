@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#E7594E"
+        android:background="@color/bg_topbar"
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/l_back"
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="《隐私保护协议》"
-            android:textColor="#F44336"
+            android:textColor="@color/bg_topbar"
             android:textSize="12dp" />
     </LinearLayout>
 </LinearLayout>

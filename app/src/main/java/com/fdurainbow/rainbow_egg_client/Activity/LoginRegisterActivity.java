@@ -18,6 +18,8 @@ public class LoginRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
 
+        getActionBar().hide();
+
         login = (Button)findViewById(R.id.btn_login);
         register = (Button)findViewById(R.id.btn_register);
         login.setOnClickListener(new View.OnClickListener() {
