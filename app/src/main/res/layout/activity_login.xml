@@ -54,7 +54,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginTop="80dp"
         android:theme="@style/EditText"
-        android:hint="请输入用户ID" />
+        android:hint="请输入用户ID(注册手机号)" />
 
     <EditText
         android:id="@+id/login_password"

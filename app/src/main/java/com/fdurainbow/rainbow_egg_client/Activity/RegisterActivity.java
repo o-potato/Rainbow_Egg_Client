@@ -62,7 +62,7 @@ public class RegisterActivity extends Activity {
     private CheckBox check;
     private List<LocalMedia> selectList = new ArrayList<>();
     String path="";
-    //private GridImageAdapter adapter;
+//    private GridImageAdapter adapter;
 
 
     @Override
@@ -101,11 +101,11 @@ public class RegisterActivity extends Activity {
                 if(check.isChecked()){
                     String username_str = username.getText().toString();
                     //TODO:
-                    // 在服务端完成ID生成
+                    // ID生成
                     id_str = userid.getText().toString();
-                    int userid_str = Integer.parseInt(id_str.substring(0,4));
-//                    int userid_str = (int) (System.currentTimeMillis() % 2147483647);
-//                    id_str = Integer.toString(userid_str);
+//                    int userid_str = Integer.parseInt(id_str);
+                    //本地测试
+                    int userid_str = Integer.parseInt(id_str.substring(0,3) + id_str.substring(7));
                     String userpassword_str = userpassword.getText().toString();
                     String repassword_str = repassword.getText().toString();
                     String imagePath = AlbumUtil.savePhoto(photo, Environment.getExternalStorageDirectory().getAbsolutePath(), String.valueOf(System.currentTimeMillis()));
@@ -116,7 +116,7 @@ public class RegisterActivity extends Activity {
 //                        System.out.println(jsonstr);
 
                         //本地测试
-                        uploadPicForTest(path);
+//                        uploadPicForTest(path);
                         Handler handler=new Handler(Looper.getMainLooper());
                         handler.post(new Runnable(){
                             public void run(){
