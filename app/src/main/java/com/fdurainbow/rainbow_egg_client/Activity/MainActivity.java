@@ -118,6 +118,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    //关注好友
+    private void follow_fd(){
+        ImageView follow_fd = (ImageView)findViewById(R.id.iv_follow_fd);
+        follow_fd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,FollowActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 }
 
 //public class MainActivity extends AppCompatActivity implements View.OnClickListener {
