@@ -101,9 +101,9 @@ public class RegisterActivity extends Activity {
                 if(check.isChecked()){
                     String username_str = username.getText().toString();
                     id_str = userid.getText().toString();
-                    int userid_str = Integer.parseInt(id_str);
+//                    int userid_str = Integer.parseInt(id_str);
                     //本地测试
-//                    int userid_str = Integer.parseInt(id_str.substring(0,3) + id_str.substring(7));
+                    int userid_str = Integer.parseInt(id_str.substring(0,3) + id_str.substring(7));
                     String userpassword_str = userpassword.getText().toString();
                     String repassword_str = repassword.getText().toString();
                     String imagePath = AlbumUtil.savePhoto(photo, Environment.getExternalStorageDirectory().getAbsolutePath(), String.valueOf(System.currentTimeMillis()));

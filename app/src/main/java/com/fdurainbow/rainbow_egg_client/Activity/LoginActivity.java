@@ -65,9 +65,9 @@ public class LoginActivity extends AppCompatActivity {
         check_user.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hostID = Integer.parseInt(id.getText().toString());
+//                hostID = Integer.parseInt(id.getText().toString());
                 //本地测试
-//                hostID = Integer.parseInt(id.getText().toString().substring(0,3) + id.getText().toString().substring(7));
+                hostID = Integer.parseInt(id.getText().toString().substring(0,3) + id.getText().toString().substring(7));
                 String password_str = password.getText().toString();
                 HostInfo hostInfo = new HostInfo(hostID,null,null,password_str);
                 String jsonstr = new Gson().toJson(hostInfo);
