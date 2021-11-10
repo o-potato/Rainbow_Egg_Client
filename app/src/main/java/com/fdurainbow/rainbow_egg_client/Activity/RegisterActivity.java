@@ -31,6 +31,8 @@ import androidx.core.content.FileProvider;
 import com.fdurainbow.rainbow_egg_client.Bean.HostInfo;
 import com.fdurainbow.rainbow_egg_client.R;
 import com.fdurainbow.rainbow_egg_client.Utils.AlbumUtil;
+import com.fdurainbow.rainbow_egg_client.Utils.BitmapUtil;
+import com.fdurainbow.rainbow_egg_client.Utils.FileUtil;
 import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -82,7 +84,7 @@ public class RegisterActivity extends Activity {
         logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showDialogBox();
+                selectPicture();
             }
         });
 
@@ -183,51 +185,60 @@ public class RegisterActivity extends Activity {
         });
     }
 
-    protected void showDialogBox(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        setTitle("设置头像");
-        String[] items = {"拍照","选择本地照片"};
-        builder.setNegativeButton("取消",null);
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                switch (i){
-                    case 0://拍照
-                        /*if(ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED)
-                            ActivityCompat.requestPermissions(RegisterActivity.this,new String[]{Manifest.permission.CAMERA},0);
-                        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            File uriFile = new File(AlbumUtil.getPath(RegisterActivity.this, temUri));
-                            temUri = FileProvider.getUriForFile(RegisterActivity.this, getPackageName(),uriFile);
-                        } else
-                            temUri = Uri.fromFile(new File(Environment.getDownloadCacheDirectory(),"image.jpg"));
-                        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,temUri);
-                        startActivityForResult(openCameraIntent,0);*/
-                        PictureSelector.create(RegisterActivity.this)
-                                .openCamera(PictureMimeType.ofImage())
-                                .forResult(PictureConfig.CHOOSE_REQUEST);
-                        break;
-                    case 1://选择本地图片
-                        /*if(ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
-                            ActivityCompat.requestPermissions(RegisterActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
-                        Intent openAlbumIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                        openAlbumIntent.setType("image/*");
-                        startActivityForResult(openAlbumIntent,1);*/
-                        PictureSelector.create(RegisterActivity.this)
-                                .openGallery(PictureMimeType.ofImage())
-                                .maxSelectNum(1)
-                                .minSelectNum(1)
-                                .imageSpanCount(4)
-                                .selectionMode(PictureConfig.MULTIPLE)
-                                .enableCrop(true)
-                                .withAspectRatio(1, 1)
-                                .forResult(PictureConfig.CHOOSE_REQUEST);
-                        break;
-                }
-            }
-        });
-        builder.create().show();
+    protected void selectPicture(){
+        PictureSelector.create(RegisterActivity.this)
+                .openGallery(PictureMimeType.ofImage())
+                .maxSelectNum(1)
+                .minSelectNum(1)
+                .selectionMode(PictureConfig.SINGLE)
+                .forResult(PictureConfig.CHOOSE_REQUEST);
     }
+
+//    protected void showDialogBox(){
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        setTitle("设置头像");
+//        String[] items = {"拍照","选择本地照片"};
+//        builder.setNegativeButton("取消",null);
+//        builder.setItems(items, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                switch (i){
+//                    case 0://拍照
+//                        /*if(ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED)
+//                            ActivityCompat.requestPermissions(RegisterActivity.this,new String[]{Manifest.permission.CAMERA},0);
+//                        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                            File uriFile = new File(AlbumUtil.getPath(RegisterActivity.this, temUri));
+//                            temUri = FileProvider.getUriForFile(RegisterActivity.this, getPackageName(),uriFile);
+//                        } else
+//                            temUri = Uri.fromFile(new File(Environment.getDownloadCacheDirectory(),"image.jpg"));
+//                        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,temUri);
+//                        startActivityForResult(openCameraIntent,0);*/
+//                        PictureSelector.create(RegisterActivity.this)
+//                                .openCamera(PictureMimeType.ofImage())
+//                                .forResult(PictureConfig.CHOOSE_REQUEST);
+//                        break;
+//                    case 1://选择本地图片
+//                        /*if(ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+//                            ActivityCompat.requestPermissions(RegisterActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},0);
+//                        Intent openAlbumIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//                        openAlbumIntent.setType("image/*");
+//                        startActivityForResult(openAlbumIntent,1);*/
+//                        PictureSelector.create(RegisterActivity.this)
+//                                .openGallery(PictureMimeType.ofImage())
+//                                .maxSelectNum(1)
+//                                .minSelectNum(1)
+//                                .imageSpanCount(4)
+//                                .selectionMode(PictureConfig.SINGLE)
+////                                .enableCrop(true)
+////                                .withAspectRatio(1, 1)
+//                                .forResult(PictureConfig.CHOOSE_REQUEST);
+//                        break;
+//                }
+//            }
+//        });
+//        builder.create().show();
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -239,11 +250,23 @@ public class RegisterActivity extends Activity {
                 images = PictureSelector.obtainMultipleResult(data);
                 selectList.addAll(images);
                 LocalMedia media = images.get(0);
-                if (media.isCut() && !media.isCompressed())
-                    path = media.getCutPath();
-
-                Bitmap bitmap = BitmapFactory.decodeFile(path);
-                logo.setImageBitmap(bitmap);
+                path = media.getPath();
+                Uri uri = Uri.parse(path);
+//                Log.d("CameraPath:", path);
+//                if(path.contains("file://")){
+//                    path.replaceFirst("file://", "content://");
+//                }
+//                Uri uri = Uri.parse(path);
+//                Log.d("CameraUri:", uri.toString());
+//                if(path.contains("content://")){
+//                    Uri uri = Uri.parse(path);
+//                    path = FileUtil.getFilePathByUri_BELOWAPI11(uri, this);
+//                }
+//
+//                Bitmap bitmap = BitmapFactory.decodeFile(path);
+////                BitmapUtil.cropBitmap(bitmap);
+//                logo.setImageBitmap(bitmap);
+                logo.setImageURI(uri);
             }
         }
     }
