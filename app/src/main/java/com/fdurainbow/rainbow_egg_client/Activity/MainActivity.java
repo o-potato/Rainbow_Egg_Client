@@ -38,7 +38,21 @@ import java.util.List;
 
 import static com.fdurainbow.rainbow_egg_client.Activity.LoginActivity.hostID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+    //UI Object
+    private TextView txt_topbar;
+    private TextView txt_channel;
+    private TextView txt_message;
+    private TextView txt_setting;
+    private FrameLayout ly_content;
+
+    //Fragment Object
+    private ChannelFragment channelF;
+    private AnnounceFragment announceF;
+    private FriendFragment settingF;
+    private FragmentManager fManager;
 
     //侧滑菜单栏
     private DrawerLayout drawerLayout;
@@ -57,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
-
+        fManager = getSupportFragmentManager();
+        bindViews();
         initView();
 
         follow_fd();
@@ -134,6 +149,113 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+//    Button btn = (Button) findViewById(R.id.mybutton);
+//    Button btn2 = (Button) findViewById(R.id.mybutton2);
+//btn.setOnClickListener(listener);
+//btn2.setOnClickListener(listener);
+//    View.OnClickListener listener = View.OnClickListener() {
+//        public void onClick(View v) {
+//            switch (v.getId()) {
+//                case R.id.mybutton:
+//                    //do something
+//                    break;
+//                case R.id.mybutton2:
+//                    //do something
+//                    break;
+//            }
+//        }
+
+    //Fragment
+    private void bindViews() {
+        txt_topbar = (TextView)findViewById(R.id.txt_topbar);
+//        txt_channel = (TextView)findViewById(R.id.txt_channel);
+        txt_message = (TextView)findViewById(R.id.txt_message);
+//        txt_setting = (TextView)findViewById(R.id.txt_setting);
+        ly_content = (FrameLayout) findViewById(R.id.ly_content);
+
+//        txt_channel.setOnClickListener(this);
+        txt_message.setOnClickListener(this);
+//        txt_setting.setOnClickListener(this);
+    }
+
+    private void setSelected(){
+//        txt_channel.setSelected(false);
+        txt_message.setSelected(false);
+//        txt_setting.setSelected(false);
+    }
+
+    private void hideAllFragment(FragmentTransaction fragmentTransaction){
+//        if(channelF != null)fragmentTransaction.hide(channelF);
+        if(announceF != null)fragmentTransaction.hide(announceF);
+//        if(settingF != null)fragmentTransaction.hide(settingF);
+    }
+
+    @Override
+    public void onClick(View view) {
+        FragmentTransaction fTransaction = fManager.beginTransaction();
+        hideAllFragment(fTransaction);
+        switch (view.getId()){
+//            case R.id.txt_channel:
+//                setSelected();
+//                txt_topbar.setText(R.string.tab_menu_normal);
+//                txt_channel.setSelected(true);
+//                if(channelF == null){
+//                    channelF = new ChannelFragment();
+//                    fTransaction.add(R.id.ly_content,channelF);
+//                }else{
+//                    fTransaction.show(channelF);
+//                }break;
+            case R.id.txt_message:
+                setSelected();
+                txt_topbar.setText(R.string.tab_menu_message);
+                txt_message.setSelected(true);
+                if(announceF == null){
+                    announceF = new AnnounceFragment();
+                    fTransaction.add(R.id.ly_content,announceF);
+                }else{
+                    fTransaction.show(announceF);
+                }break;
+//            case R.id.txt_setting:
+//                setSelected();
+//                txt_topbar.setText(R.string.tab_menu_setting);
+//                txt_setting.setSelected(true);
+//                if(settingF == null){
+//                    settingF = new FriendFragment();
+//                    fTransaction.add(R.id.ly_content,settingF);
+//                }else{
+//                    fTransaction.show(settingF);
+//                }break;
+        }
+        fTransaction.commit();
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        List<LocalMedia> images;
+        Log.v("ImageInfo","image");
+        if (resultCode == RESULT_OK) {
+            if (requestCode == PictureConfig.CHOOSE_REQUEST) {// 图片选择结果回调
+
+                //images = PictureSelector.obtainMultipleResult(data);
+                //selectList.addAll(images);
+                Log.v("ImageInfo","-------------------------------");
+
+                //PictureSelector.obtainMultipleResult(data);
+                announceF.show(PictureSelector.obtainMultipleResult(data));
+
+                // 例如 LocalMedia 里面返回三种path
+                // 1.media.getPath(); 为原图path
+                // 2.media.getCutPath();为裁剪后path，需判断media.isCut();是否为true
+                // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
+                // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
+                //adapter.setList(selectList);
+                //adapter.notifyDataSetChanged();
+            }
+        }
     }
 }
 
