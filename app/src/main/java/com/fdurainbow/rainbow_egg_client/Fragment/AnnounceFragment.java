@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fdurainbow.rainbow_egg_client.Activity.LoginActivity;
 import com.fdurainbow.rainbow_egg_client.Activity.MainActivity;
 import com.fdurainbow.rainbow_egg_client.Bean.SubmitMoment;
 import com.fdurainbow.rainbow_egg_client.NineGrid.FullyGridLayoutManager;
@@ -92,7 +93,7 @@ public class AnnounceFragment extends Fragment {
                 String DateTime = simpleDateFormat.format(date);
                 sub.setTime(DateTime);
                 sub.setMom_content(ed_content.getText().toString());
-                sub.setHostID(Integer.toString(1));
+                sub.setHostID(Integer.toString(LoginActivity.hostID));
                 String jsonstr = new Gson().toJson(sub);
                 System.out.println(jsonstr);
                 RequestBody body = RequestBody.create(MediaType.parse("application/json"), jsonstr);
