@@ -151,7 +151,8 @@ public class ChannelFragment extends Fragment {
             public void run() {
                 try{
                     ReceiveInfo rec = new ReceiveInfo();//Log.v("1234","1234");
-                    list_item = rec.ReiceiveDynamic(hostID);
+//                    list_item = rec.ReiceiveDynamic(hostID);
+                    list_item = rec.ReiceiveRecent(50);
                     //Log.v("getinfo",list_item.get(0).toString());
                     if(!list_item.isEmpty())
                         handler.sendMessage(handler.obtainMessage(22,list_item));

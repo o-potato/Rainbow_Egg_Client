@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.List;
 
@@ -21,6 +22,27 @@ public class ReceiveInfo {
     List<Dynamic> dy;
     List<Comment> com;
     PraiseDetail pra;
+
+    public List<Dynamic> ReiceiveRecent(int num) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("http://10.176.50.27:8080/moment="+num)
+                .build();
+        Call call = client.newCall(request);
+        try {
+            Response response = call.execute();
+            String json = response.body().string();
+            Log.v("1234", json);
+            Gson gson = new Gson();
+            dy = gson.fromJson(json, new TypeToken<List<Dynamic>>() {}.getType());
+            for (Dynamic dy1 : dy)
+                Log.v("bbb", dy1.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dy;
+    }
+
     public List<Dynamic> ReiceiveDynamic(int hostID) {
 
             ID = hostID;
