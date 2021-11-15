@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        user_name.setText("lpz");
 //        user_sign.setText("");
 
+        //获取登录信息
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -283,6 +284,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case 2:
                 txt_setting.performClick();
+                break;
+            default: break;
+        }
+    }
+
+    public void reloadFragment(int fragmentId) {
+        switch (fragmentId) {
+            case 0:
+                break;
+            case 1:
+                fManager.beginTransaction().remove(announceF).commit();
+                announceF = null;
+                txt_message.performClick();
+                break;
+            case 2:
                 break;
             default: break;
         }

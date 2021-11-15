@@ -131,6 +131,7 @@ public class AnnounceFragment extends Fragment {
                                         public void run(){
                                             Toast.makeText(getActivity(),"动态发布成功！",Toast.LENGTH_SHORT).show();
                                             MainActivity mActivity = (MainActivity) getActivity();
+                                            mActivity.reloadFragment(1);
                                             mActivity.setTab(0);
                                         }
                                     });

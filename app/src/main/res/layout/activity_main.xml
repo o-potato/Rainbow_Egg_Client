@@ -36,7 +36,7 @@
                     android:gravity="center"
                     android:textSize="18sp"
                     android:textColor="@color/text_topbar"
-                    android:text="@string/tab_menu_alert"
+                    android:text="@string/tab_menu_normal"
                     android:layout_weight="8"/>
                 <ImageView
                     android:id="@+id/iv_follow_fd"
