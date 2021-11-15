@@ -273,5 +273,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void setTab(int fragmentId) {
+        switch (fragmentId) {
+            case 0:
+                txt_channel.performClick();
+                break;
+            case 1:
+                txt_message.performClick();
+                break;
+            case 2:
+                txt_setting.performClick();
+                break;
+            default: break;
+        }
+    }
 }
 

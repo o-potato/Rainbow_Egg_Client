@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.fdurainbow.rainbow_egg_client.Activity.MainActivity;
 import com.fdurainbow.rainbow_egg_client.Bean.SubmitMoment;
 import com.fdurainbow.rainbow_egg_client.NineGrid.FullyGridLayoutManager;
 import com.fdurainbow.rainbow_egg_client.NineGrid.GridImageAdapter;
@@ -129,6 +130,8 @@ public class AnnounceFragment extends Fragment {
                                     handler.post(new Runnable(){
                                         public void run(){
                                             Toast.makeText(getActivity(),"动态发布成功！",Toast.LENGTH_SHORT).show();
+                                            MainActivity mActivity = (MainActivity) getActivity();
+                                            mActivity.setTab(0);
                                         }
                                     });
                                 }
