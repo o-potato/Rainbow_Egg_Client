@@ -29,10 +29,10 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.fdurainbow.rainbow_egg_client.Bean.HostInfo;
+import com.fdurainbow.rainbow_egg_client.NineGrid.GridImageAdapter;
 import com.fdurainbow.rainbow_egg_client.R;
 import com.fdurainbow.rainbow_egg_client.Utils.AlbumUtil;
-import com.fdurainbow.rainbow_egg_client.Utils.BitmapUtil;
-import com.fdurainbow.rainbow_egg_client.Utils.FileUtil;
+
 import com.google.gson.Gson;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
@@ -64,7 +64,7 @@ public class RegisterActivity extends Activity {
     private CheckBox check;
     private List<LocalMedia> selectList = new ArrayList<>();
     String path="";
-//    private GridImageAdapter adapter;
+    private GridImageAdapter adapter;
 
 
     @Override
@@ -104,7 +104,7 @@ public class RegisterActivity extends Activity {
                     String username_str = username.getText().toString();
                     id_str = userid.getText().toString();
 //                    int userid_str = Integer.parseInt(id_str);
-                    //本地测试
+
                     int userid_str = Integer.parseInt(id_str.substring(0,3) + id_str.substring(7));
                     String userpassword_str = userpassword.getText().toString();
                     String repassword_str = repassword.getText().toString();
@@ -115,7 +115,7 @@ public class RegisterActivity extends Activity {
                         String jsonstr = new Gson().toJson(hostInfo);
 //                        System.out.println(jsonstr);
 
-                        //本地测试
+//                        //本地测试
 //                        uploadPicForTest(path);
 //                        Handler handler=new Handler(Looper.getMainLooper());
 //                        handler.post(new Runnable(){
@@ -127,7 +127,7 @@ public class RegisterActivity extends Activity {
 //                        startActivity(nextIntent);
 //                        finish();
 
-                        //正式代码
+
                         uploadPic(path);
 
                         RequestBody body = RequestBody.create(MediaType.parse("application/json"),jsonstr);
@@ -332,8 +332,4 @@ public class RegisterActivity extends Activity {
         }
     }
 
-    //本地测试
-//    private void uploadPicForTest(String imagePath) {
-//        Toast.makeText(RegisterActivity.this, "头像上传成功！", Toast.LENGTH_SHORT).show();
-//    }
 }
