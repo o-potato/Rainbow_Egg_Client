@@ -96,22 +96,22 @@ public class ViewAdapter extends BaseAdapter {
         String image_item;
         List<String> image_list = new ArrayList<>();
         int p=0;
-        for(int k=0; k<sImage.length();k++){
+        int k=p+1;
+        for(k=p+1; k<sImage.length();k++){
             if(sImage.charAt(k) == '|'){
-                image_item = "http://10.176.50.27:8080/uploadimage/"+sImage.substring(p,k);
+                image_item = "http://10.176.50.27:8080/uploadimage/"+sImage.substring(p+1,k);
                 //image_item = sImage.substring(p,k);
                 Log.v("Myimage2",image_item);
-                p=k+1;
+                p=k;
                 image_list.add(image_item);
             }
         }
         if(image_list.size() == 0){
             Log.v("Myimage1",sImage);
-            image_list.add("http://10.176.50.27:8080/uploadimage/"+sImage);
+            image_list.add("http://10.176.50.27:8080/uploadimage/"+sImage.substring(p+1,sImage.length()));
         }
-
         else{
-            image_item = sImage.substring(p,sImage.length());
+            image_item = sImage.substring(p+1,sImage.length());
             image_list.add("http://10.176.50.27:8080/uploadimage/"+image_item);
             Log.v("Myimage2",image_item);
         }
