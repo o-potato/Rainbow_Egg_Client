@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.os.Message;
@@ -44,6 +45,7 @@ public class ChannelFragment extends Fragment {
     }
     ListView lv_view;
     List<Dynamic> list_item;
+    SwipeRefreshLayout swipeRefreshLayout;
     ViewAdapter adapter = new ViewAdapter();
     Handler handler = new Handler(){
         @Override
@@ -51,6 +53,8 @@ public class ChannelFragment extends Fragment {
             adapter.setDatas((List<Dynamic>)msg.obj);
             adapter.setInflater(getActivity());
             lv_view.setAdapter(adapter);
+
+            swipeRefreshLayout.setRefreshing(false);
 
             adapter.setOnItemCollectListener(new ViewAdapter.onItemCollectListener() {
                 @Override
@@ -148,7 +152,27 @@ public class ChannelFragment extends Fragment {
                               Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_view,container,false);
         lv_view = view.findViewById(R.id.lv_view);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefresh);
         ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getActivity()));
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            ReceiveInfo rec = new ReceiveInfo();//Log.v("1234","1234");
+                            list_item = rec.ReiceiveDynamic(hostID);
+                            //Log.v("getinfo",list_item.get(0).toString());
+                            if(!list_item.isEmpty())
+                                handler.sendMessage(handler.obtainMessage(22,list_item));
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        });
         new Thread(new Runnable() {
             @Override
             public void run() {
