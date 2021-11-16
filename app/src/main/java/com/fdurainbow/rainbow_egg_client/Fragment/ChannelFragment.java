@@ -22,6 +22,8 @@ import com.fdurainbow.rainbow_egg_client.Bean.PraiseOrCollectMsg;
 import com.fdurainbow.rainbow_egg_client.Bean.ReceiveInfo;
 import com.fdurainbow.rainbow_egg_client.R;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.IOException;
 import java.util.List;
@@ -146,13 +148,13 @@ public class ChannelFragment extends Fragment {
                               Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_view,container,false);
         lv_view = view.findViewById(R.id.lv_view);
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(getActivity()));
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
                     ReceiveInfo rec = new ReceiveInfo();//Log.v("1234","1234");
-//                    list_item = rec.ReiceiveDynamic(hostID);
-                    list_item = rec.ReiceiveRecent(50);
+                    list_item = rec.ReiceiveDynamic(hostID);
                     //Log.v("getinfo",list_item.get(0).toString());
                     if(!list_item.isEmpty())
                         handler.sendMessage(handler.obtainMessage(22,list_item));
