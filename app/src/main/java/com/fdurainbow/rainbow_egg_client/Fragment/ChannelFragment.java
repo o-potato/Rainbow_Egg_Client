@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.fdurainbow.rainbow_egg_client.Activity.CommentDetail;
+import com.fdurainbow.rainbow_egg_client.Activity.LoginActivity;
 import com.fdurainbow.rainbow_egg_client.Adapter.ViewAdapter;
 import com.fdurainbow.rainbow_egg_client.Bean.Dynamic;
 import com.fdurainbow.rainbow_egg_client.Bean.PraiseDetail;
@@ -61,7 +62,7 @@ public class ChannelFragment extends Fragment {
                 public void onCollectClick(final int i) {
                     PraiseOrCollectMsg msg = new PraiseOrCollectMsg();
                     msg.setDynamicID(list_item.get(i).getDynamicID());
-                    msg.setHostID(1);
+                    msg.setHostID(hostID);
                     String jsonstr = new Gson().toJson(msg);
                     RequestBody body = RequestBody.create(MediaType.parse("application/json"),jsonstr);
                     OkHttpClient client = new OkHttpClient();
@@ -103,7 +104,7 @@ public class ChannelFragment extends Fragment {
                 public void onPraiseClick(final int i) {
                     PraiseOrCollectMsg msg = new PraiseOrCollectMsg();
                     msg.setDynamicID(list_item.get(i).getDynamicID());
-                    msg.setHostID(1);
+                    msg.setHostID(hostID);
                     String jsonstr = new Gson().toJson(msg);
                     RequestBody body = RequestBody.create(MediaType.parse("application/json"),jsonstr);
                     OkHttpClient client = new OkHttpClient();
